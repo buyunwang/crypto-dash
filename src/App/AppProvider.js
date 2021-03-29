@@ -8,7 +8,7 @@ const MAX_FAVORITES = 10
 
 export class AppProvider extends React.Component{
     constructor(props){
-        super(props);
+        super(props)
         this.state = {
             page : "dashboard",
             favorites: ['BTC', 'ETH', 'XMR', 'DOGE'],
@@ -20,6 +20,11 @@ export class AppProvider extends React.Component{
             confirmFavorites: this.confirmFavorites,
             setFilteredCoins: this.setFilteredCoins
         }
+    }
+
+    componentDidMount = () => {
+        this.fetchCoins()
+        this.fetchPrices()
     }
 
     addCoin = key => {
@@ -37,20 +42,40 @@ export class AppProvider extends React.Component{
 
     isInFavorites = key => _.includes(this.state.favorites, key)
 
-    componentDidMount = () => {
-        this.fetchCoins();
-    }
-
     fetchCoins = async () => {
         let coinList = (await cc.coinList()).Data;
         this.setState({coinList});
     } 
 
+    fetchPrices = async () => {
+        if(this.state.firstVisit) return
+        let prices = await this.prices()
+         // filter the empty price objects
+        prices = Object.values(prices).filter(price => Object.keys(price).length)
+        console.log(prices)
+        this.setState({prices})
+    }
+
+    prices = async () => {
+        let returnData = []
+        for (let i = 0; i < this.state.favorites.length; i++){
+            try {
+                let priceData = await cc.priceFull(this.state.favorites[i], 'USD')
+                return returnData.push(priceData)
+            } catch (e) {
+                console.warn('Fetch price error: ', e)
+            }
+        }
+        return returnData
+    }
+
     confirmFavorites =()=>{
         this.setState({
             firstVisit: false,
             page: 'dashboard'
-        });
+        }, () => {
+            this.fetchPrices()
+        })
         localStorage.setItem('cryptoDash', JSON.stringify({
             favorites: this.state.favorites
         }))
@@ -66,7 +91,7 @@ export class AppProvider extends React.Component{
             }
         }
         let {favorites} = cryptoDashData;
-        return {favorites};
+        return {favorites}
     }
 
     setPage = page => this.setState({page});
