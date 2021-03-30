@@ -27,7 +27,7 @@ function ControlButton({name}){
   return (
     <AppContext.Consumer>
     {({page, setPage}) =>(
-        <ControlButtonElem 
+        <ControlButtonElem
         active={page === name}
         onClick={()=>setPage(name)}>
           {toProperCase(name)}
@@ -45,5 +45,5 @@ export default function(){
             <ControlButton name="dashboard"/>
             <ControlButton name="settings" />
       </Bar>
-    );
+    )
 }
