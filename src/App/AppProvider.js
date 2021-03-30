@@ -45,7 +45,7 @@ export class AppProvider extends React.Component{
     fetchCoins = async () => {
         let coinList = (await cc.coinList()).Data;
         this.setState({coinList});
-    } 
+    }
 
     fetchPrices = async () => {
         if(this.state.firstVisit) return
@@ -58,18 +58,19 @@ export class AppProvider extends React.Component{
 
     prices = async () => {
         let returnData = []
-        for (let i = 0; i < this.state.favorites.length; i++){
+        for (let i = 0; i < this.state.favorites.length; i++) {
             try {
                 let priceData = await cc.priceFull(this.state.favorites[i], 'USD')
-                return returnData.push(priceData)
+                returnData.push(priceData)
             } catch (e) {
                 console.warn('Fetch price error: ', e)
             }
         }
+
         return returnData
     }
 
-    confirmFavorites =()=>{
+    confirmFavorites = () => {
         this.setState({
             firstVisit: false,
             page: 'dashboard'
@@ -82,7 +83,7 @@ export class AppProvider extends React.Component{
 
     }
 
-    savedSettings(){
+    savedSettings() {
         let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
         if(!cryptoDashData){
             return {

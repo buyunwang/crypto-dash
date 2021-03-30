@@ -30,5 +30,5 @@ export default function ({topSection}){
                 </CoinGridStyled>
             )}
         </AppContext.Consumer>
-    );
+    )
 }
