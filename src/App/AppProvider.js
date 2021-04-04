@@ -71,6 +71,7 @@ export class AppProvider extends React.Component{
     }
 
     confirmFavorites = () => {
+        let currentFavorite = this.state.favorites[0]
         this.setState({
             firstVisit: false,
             page: 'dashboard'
