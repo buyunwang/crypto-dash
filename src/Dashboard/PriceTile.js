@@ -55,7 +55,7 @@ const ChangePercent = ({data}) => {
 
 const PriceTile = ({sym, data, currentFavorite, setCurrentFavorite}) => {
     return (
-        <PriceTileStyled currentFavorite={currentFavorite}>
+        <PriceTileStyled onClick={setCurrentFavorite} currentFavorite={currentFavorite}>
             <CoinHeaderGridStyled>
                 <div>
                     {sym}
@@ -71,7 +71,7 @@ const PriceTile = ({sym, data, currentFavorite, setCurrentFavorite}) => {
 
 const PriceTileCompact = ({sym, data, currentFavorite, setCurrentFavorite}) => {
     return (
-        <PriceTileStyled compact currentFavorite={currentFavorite}>
+        <PriceTileStyled onClick={setCurrentFavorite} compact currentFavorite={currentFavorite}>
             <JustifyLeft>{sym}</JustifyLeft>
             <ChangePercent data={data}/>
             <div>
@@ -93,7 +93,7 @@ export default ({price, index}) => {
                     sym={sym}
                     data={data}
                     currentFavorite={currentFavorite === sym}
-                    setCurrentFavorite={setCurrentFavorite}
+                    setCurrentFavorite={() => setCurrentFavorite(sym)}
                 >
                 </TileClass>
             }
