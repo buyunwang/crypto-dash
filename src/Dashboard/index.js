@@ -1,8 +1,9 @@
-import React from 'react';
-import Page from '../Shared/Page';
+import React from 'react'
+import Page from '../Shared/Page'
 import PriceGrid from './PriceGrid'
 import styled from 'styled-components'
-import CoinSpotlight from "./CoinSpotlight";
+import CoinSpotlight from "./CoinSpotlight"
+import PriceChart from "./PriceChart";
 
 const ChartGrid = styled.div`
     display: grid;
@@ -17,6 +18,7 @@ export default function(){
             <PriceGrid/>
             <ChartGrid>
                 <CoinSpotlight/>
+                <PriceChart />
             </ChartGrid>
         </Page>
     )
