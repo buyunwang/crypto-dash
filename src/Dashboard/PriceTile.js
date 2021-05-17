@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {SelectableTile} from "../Shared/Tile"
 import {fontSize3, fontSizeBig, greenBoxShadow} from "../Shared/Styles"
 import {CoinHeaderGridStyled} from "../Settings/CoinHeaderGrid"
-import {AppContext} from "../App/AppProvider";
+import {AppContext} from "../App/AppProvider"
 
 const PriceTileStyled = styled(SelectableTile)`
     ${props => props.compact && css`
@@ -47,7 +47,7 @@ const ChangePercent = ({data}) => {
     return (
         <JustifyRight>
             <ChangePct red={data.CHANGEPCT24HOUR < 0}>
-                {numberFormat(data.CHANGEPCT24HOUR)}
+                {numberFormat(data.CHANGEPCT24HOUR)}%
             </ChangePct>
         </JustifyRight>
     )
